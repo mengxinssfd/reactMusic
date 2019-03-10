@@ -1,0 +1,63 @@
+.cp-song-item
+  display: flex
+  align-items: center
+  /*padding-bottom: 18px*/
+  padding: 18px 0
+  margin: 0 12px
+  border-bottom: .5px solid #f0f0f0
+  &.need-pay
+    .order
+      color: black
+    .content
+      .title
+        color: black
+        text-decoration: line-through
+  .order
+    flex: 0 0 50px
+    display: inline-block
+    vertical-align: middle
+    text-align: center
+    width: 50px
+    .icon-trophy
+      font-size: 16px
+      line-height: 30px
+      &.first
+        color: gold
+      &.second
+        color: silver
+      &.third
+        color: #ffc03d
+    .number
+      line-height: 30px
+      font-size: 14px
+  .content
+    flex: 1
+    display: inline-block
+    vertical-align: top
+    overflow: hidden
+    .title
+      line-height: 14px
+      font-size: 14px
+      color: black
+      overflow: hidden
+      white-space: nowrap
+      text-overflow: ellipsis
+      .has-mv
+        display: inline-block
+        vertical-align: top
+        margin-right: 4px
+        padding: 0 2px
+        color: red
+        font-size: 12px
+        border: solid 1px red
+        border-radius: 3px
+    .desc
+      width: 100%
+      margin-top: 4px
+      color: black
+      line-height: 12px
+      font-size: 12px
+      overflow: hidden
+      white-space: nowrap
+      text-overflow: ellipsis
+

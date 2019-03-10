@@ -1,0 +1,21 @@
+.tabbar
+  position: fixed
+  left: 0
+  right: 0
+  top: 0
+  display: flex
+  z-index: 100
+  align-items: center
+  height: 40px
+  background: #ff4227
+  box-shadow: 0 0 6px 0 gray
+  + div
+    padding-top: 40px
+  .tab-item
+    flex: 1
+    font-size: 14px
+    text-align: center
+    color: rgba(255, 255, 255, .6)
+    transition: color 200ms linear
+    &.active
+      color: white

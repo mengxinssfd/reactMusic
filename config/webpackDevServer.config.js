@@ -7,10 +7,18 @@ const ignoredFiles = require('react-dev-utils/ignoredFiles');
 const paths = require('./paths');
 const fs = require('fs');
 
+// 服务器转发
+// 第一步
+const express = require('express');
+const app = express();// 请求server
+const axios = require('axios');
+const apiRouter = express.Router();
+app.use('/api', apiRouter);// 通过路由请求数据
+
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 const host = process.env.HOST || '0.0.0.0';
 
-module.exports = function(proxy, allowedHost) {
+module.exports = function (proxy, allowedHost) {
   return {
     // WebpackDevServer 2.4.3 introduced a security fix that prevents remote
     // websites from potentially accessing local content through DNS rebinding:
@@ -29,7 +37,7 @@ module.exports = function(proxy, allowedHost) {
     // specified the `proxy` setting. Finally, we let you override it if you
     // really know what you're doing with a special environment variable.
     disableHostCheck:
-      !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true',
+    !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true',
     // Enable gzip compression of generated files.
     compress: true,
     // Silence WebpackDevServer's own logs since they're generally not useful.
@@ -83,6 +91,25 @@ module.exports = function(proxy, allowedHost) {
     public: allowedHost,
     proxy,
     before(app, server) {
+      app.get('/api/getSomething', (req, res) => {
+        let url = req.query.url;
+        // let params = JSON.parse(req.query.data)// 要的是json数据
+        let referer = req.query.referer;
+
+        console.log('api api api');
+        axios.get(url, {
+          headers: {
+            referer: referer,
+          },
+          // params: params
+        }).then((response) => {
+          let data = response.data;
+          res.send(data);
+        }).catch((e) => {
+          console.log(e);
+        });
+
+      });
       if (fs.existsSync(paths.proxySetup)) {
         // This registers user provided middleware for proxy reasons
         require(paths.proxySetup)(app);

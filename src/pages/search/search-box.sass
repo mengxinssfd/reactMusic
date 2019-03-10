@@ -1,0 +1,44 @@
+.search-box
+  position: fixed
+  top: 40px
+  left: 0
+  right: 0
+  display: flex
+  align-items: center
+  padding: 10px 0
+  background: white
+  font-size: 14px
+  line-height: 20px
+  border-bottom: .5px solid #f0f0f0
+  + div
+    border-top: 41px solid white
+  .icon-search
+    width: 30px
+    padding-bottom: 4px
+    text-align: center
+    font-size: 20px
+    font-family: cursive
+  .input
+    box-sizing: border-box
+    flex: 1
+    & > input
+      width: 100%
+      background: white
+      color: black
+      line-height: 14px
+      -webkit-user-modify: read-write-plaintext-only
+      font-size: 16px
+      &:focus
+        outline: none
+        color: black
+  .clear
+    position: absolute
+    right: 0
+    top: 50%
+    transform: translateY(-50%)
+    width: 30px
+    text-align: center
+    line-height: 18px
+    .icon-cross
+      font-size: 12px
+      font-family: cursive
