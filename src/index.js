@@ -1,9 +1,11 @@
 import React from 'react';
+import {Provider} from 'react-redux';
 import ReactDOM from 'react-dom';
 import './common/style/index.css';
 import App from './components/app/App';
 import * as serviceWorker from './serviceWorker';
 import {eventBus, eventType} from './common/js/evenBus';
+import store from './store/store';
 
 let last = 0;
 
@@ -26,7 +28,10 @@ function scrollHandler() {
 
 scrollHandler();
 window.addEventListener('scroll', scrollHandler);
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App/>
+  </Provider>, document.getElementById('root'));
 
 // ReactDOM.render(<Router routes={routers}/>, document.body);
 // If you want your app to work offline and load faster, you can change

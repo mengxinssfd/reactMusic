@@ -8,8 +8,13 @@ import './search.sass';
 import {debounce} from '../../common/js/util';
 import SearchList from './search-list';
 import {createSongFromSearch} from '../../common/js/song';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {changeStyle} from '../../store/actions';
 
-export default class Search extends Page {
+// import Store from '../../store/store';
+
+class Search extends Page {
   data = {
     lastSearchValue: '',
     page: 1,
@@ -27,6 +32,8 @@ export default class Search extends Page {
   }
 
   componentWillMount() {
+    this.props.actions.changeStyle({themeColor: 'gray'});
+    // Store.dispatch({type: 'change', themeColor: 'gray'});
     this.searchDebounce = debounce((value) => {
       console.log('ssssssssss');
       this.getSearch(value);
@@ -73,7 +80,7 @@ export default class Search extends Page {
 
   render() {
     return (
-      <div className={'pg-search'}>
+      <div className={'pg-search'} style={{background: this.props.color}}>
         <SearchBox
           value={this.state.searchValue}
           onInput={this.onInput.bind(this)}
@@ -92,3 +99,10 @@ export default class Search extends Page {
     );
   }
 }
+
+const mapStateToProps = (state, props) => ({color: state.style.themeColor});
+const mapDisptchToProps = dispatch => ({
+  actions: bindActionCreators({changeStyle}, dispatch),
+});
+
+export default connect(mapStateToProps, mapDisptchToProps)(Search);

@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {NavLink} from 'react-router-dom';
 import './tabbar.sass';
 
-export default class Name extends Component {
+export default class TabBar extends Component {
   render() {
     console.log(this.props);
     return (
